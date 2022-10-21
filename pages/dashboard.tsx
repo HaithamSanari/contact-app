@@ -1,12 +1,12 @@
-import type { NextPage } from 'next'
+import React from 'react'
 import { Container } from 'react-bootstrap'
 
-const Home: NextPage = () => {
+const Dashboard = () => {
   return (
     <Container className="d-flex justify-content-center mt-5">
-      <p>This is Home page</p>
+      <p>These are secrets sh.....</p>
     </Container>
   )
 }
 
-export default Home
+export default Dashboard
