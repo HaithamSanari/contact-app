@@ -7,7 +7,6 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from '../../../lib/prisma';
 
-
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -39,5 +38,6 @@ export const authOptions = {
       from: process.env.EMAIL_FROM,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 };
 export default NextAuth(authOptions);
