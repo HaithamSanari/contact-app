@@ -1,61 +1,85 @@
-import React from 'react'
-import { signIn, useSession, signOut } from 'next-auth/react'
-import Link from 'next/link'
-import { Button, Container, Nav, Navbar } from 'react-bootstrap'
+import React from 'react';
+import { useSession, signOut } from 'next-auth/react';
+import Link from 'next/link';
+import { Box, Flex, Button, Text, Container, Image } from '@chakra-ui/react';
 
 const Header = () => {
-  const { data, status } = useSession()
-
-  const handleSignIn = async () => {
-    await signIn('github', {
-      callbackUrl: 'http://localhost:3000/dashboard',
-    })
-  }
+  const { data, status } = useSession();
 
   const handleLogout = async () => {
     await signOut({
       callbackUrl: 'http://localhost:3000/',
-    })
-  }
+    });
+  };
 
   return (
-    <Navbar bg="light">
-      <Container>
-        <Link href="/" passHref>
-          <Navbar.Brand>NextAuth Example</Navbar.Brand>
-        </Link>
-        <Navbar.Collapse className="justify-content-end">
-          <Nav className="ml-auto">
+    <Container bg='#F8F9FA' maxW='100%' py='2'>
+      <Flex alignItems='center' justifyContent='space-around'>
+        <Box>
+          <Link href='/' passHref>
+            <Text
+              bgClip='text'
+              fontSize={['md', 'lg', '2xl']}
+              fontWeight='bold'
+              color='black'
+              cursor='pointer'
+            >
+              Contact App
+            </Text>
+          </Link>
+        </Box>
+        <Box>
+          <Flex alignItems='center'>
             {status === 'authenticated' ? (
               <>
                 {data.user?.image && data.user.name ? (
-                  <img
+                  <Image
                     src={data.user.image}
                     alt={data.user.name}
-                    width={50}
-                    height={50}
-                    style={{ borderRadius: '50%' }}
+                    borderRadius='full'
+                    boxSize={['40px', '50px']}
                   />
                 ) : null}
-                <Nav.Link as="div">
-                  <Link href="/dashboard" passHref>
-                    <Button variant="outline-primary">Dashboard</Button>
-                  </Link>
-                </Nav.Link>
-                <Nav.Link as="div">
-                  <Button onClick={handleLogout}>Logout</Button>
-                </Nav.Link>
+                <Link href='/dashboard' passHref>
+                  <Button
+                    colorScheme='messenger'
+                    variant='outline'
+                    bg='white'
+                    color='#0D6EFD'
+                    mx={['2', '4']}
+                    fontSize='16px'
+                    width='70%'
+                  >
+                    Dashboard
+                  </Button>
+                </Link>
+                <Box>
+                  <Button colorScheme='red' width='90%' onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </Box>
               </>
             ) : (
-              <Nav.Link as="div">
-                <Button onClick={handleSignIn}>SignIn</Button>
-              </Nav.Link>
+              <Box>
+                <Link href='/account' passHref>
+                  <Button
+                    m='auto'
+                    bg='#0D6EFD'
+                    colorScheme='messenger'
+                    color='white'
+                    mr='3'
+                    fontWeight='normal'
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+              </Box>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  )
-}
+          </Flex>
+        </Box>
+      </Flex>
+    </Container>
+  );
+};
 
-export default Header
+export default Header;
