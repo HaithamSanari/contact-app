@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <Flex alignItems='center' justifyContent='center' height='90vh'>
       <Box p='4'>
-        <Heading size='2xl'>Welcome to Contact App</Heading>
+        <Heading size='2xl'>Welcome to Contact App </Heading>
       </Box>
     </Flex>
   );
