@@ -140,7 +140,7 @@ const Dashboard = ({ notes }: Notes) => {
         maxW='960px'
         w={['100%', '100%', '70%', '40%']}
         bg='#0F172A'
-        height={['70vh', '70vh', 'auto', '100vh']}
+        height={['86vh', '70vh', 'auto', '100vh']}
       >
         <form
           onSubmit={(e) => {
